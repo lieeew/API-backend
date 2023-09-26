@@ -2,6 +2,7 @@ package com.yupi.yuapi.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.google.gson.Gson;
 import com.yupi.yuapi.annotation.AuthCheck;
 import com.yupi.yuapi.common.BaseResponse;
 import com.yupi.yuapi.common.ErrorCode;
@@ -9,6 +10,7 @@ import com.yupi.yuapi.common.IdRequest;
 import com.yupi.yuapi.common.ResultUtils;
 import com.yupi.yuapi.exception.BusinessException;
 import com.yupi.yuapi.model.dto.interfaceInfo.InterfaceInfoAddRequest;
+import com.yupi.yuapi.model.dto.interfaceInfo.InterfaceInfoInvokeRequest;
 import com.yupi.yuapi.model.dto.interfaceInfo.InterfaceInfoQueryRequest;
 import com.yupi.yuapi.model.dto.interfaceInfo.InterfaceInfoUpdateRequest;
 import com.yupi.yuapi.model.entity.InterfaceInfo;
@@ -24,6 +26,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Objects;
 
 /**
  * @author leikooo
@@ -165,6 +168,7 @@ public class InterfaceInfoController {
             throw new BusinessException(ErrorCode.SYSTEM_ERROR, "接口调用失败");
         }
         InterfaceInfo interfaceInfo = new InterfaceInfo();
+        interfaceInfo.setId(oldInterfaceInfo.getId());
         interfaceInfo.setUserId(id);
         interfaceInfo.setStatus(InterfaceStatusEnum.ONLINE.getValue());
         boolean result = interfaceInfoService.updateById(interfaceInfo);
@@ -174,32 +178,70 @@ public class InterfaceInfoController {
     /**
      * 下线
      *
-     * @param interfaceInfoUpdateRequest
+     * @param idRequest
      * @param request
      * @return
      */
     @PostMapping("/offline")
-    public BaseResponse<Boolean> offlineInterfaceInfo(@RequestBody InterfaceInfoUpdateRequest interfaceInfoUpdateRequest, HttpServletRequest request) {
-        if (interfaceInfoUpdateRequest == null || interfaceInfoUpdateRequest.getId() <= 0) {
+    public BaseResponse<Boolean> offlineInterfaceInfo(@RequestBody IdRequest idRequest, HttpServletRequest request) {
+        if (idRequest == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
-        InterfaceInfo interfaceInfo = new InterfaceInfo();
-        BeanUtils.copyProperties(interfaceInfoUpdateRequest, interfaceInfo);
-        // 参数校验
-        interfaceInfoService.validInterfaceInfo(interfaceInfo, false);
-        User user = userService.getLoginUser(request);
-        long id = interfaceInfoUpdateRequest.getId();
-        // 判断是否存在
+
+        Long id = idRequest.getId();
+        if (id == null || id <= 0) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        // 判断接口是否有存在
         InterfaceInfo oldInterfaceInfo = interfaceInfoService.getById(id);
         if (oldInterfaceInfo == null) {
             throw new BusinessException(ErrorCode.NOT_FOUND_ERROR);
         }
-        // 仅本人或管理员可修改
-        if (!oldInterfaceInfo.getUserId().equals(user.getId()) && !userService.isAdmin(request)) {
-            throw new BusinessException(ErrorCode.NO_AUTH_ERROR);
-        }
+        InterfaceInfo interfaceInfo = new InterfaceInfo();
+        interfaceInfo.setId(oldInterfaceInfo.getId());
+        interfaceInfo.setUserId(id);
+        interfaceInfo.setStatus(InterfaceStatusEnum.OFFLINE.getValue());
         boolean result = interfaceInfoService.updateById(interfaceInfo);
         return ResultUtils.success(result);
     }
+
+     /**
+     * 调用接口
+     *
+     * @param interfaceInfoInvokeRequest
+     * @param request
+     * @return
+     */
+    @PostMapping("/invoke")
+    public BaseResponse<Object> invokeInterfaceInfo(@RequestBody InterfaceInfoInvokeRequest interfaceInfoInvokeRequest, HttpServletRequest request) {
+        if (interfaceInfoInvokeRequest == null) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+
+        Long id = interfaceInfoInvokeRequest.getId();
+        if (id == null || id <= 0) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        // 判断接口是否有存在
+        InterfaceInfo interfaceInfo = interfaceInfoService.getById(id);
+        if (interfaceInfo == null) {
+            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR);
+        }
+        Integer status = interfaceInfo.getStatus();
+        if (!Objects.equals(status, InterfaceStatusEnum.ONLINE.getValue())) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "接口");
+        }
+        User loginUser = userService.getLoginUser(request);
+        String secretKey = loginUser.getSecretKey();
+        String accessKey = loginUser.getAccessKey();
+        YupiApiClient tempYupi = new YupiApiClient(secretKey, accessKey);
+        // 转换参数
+        String requestParams = interfaceInfoInvokeRequest.getUserRequestParams();
+        Gson gson = new Gson();
+        com.yupi.yuapiclientsdk.model.User user = gson.fromJson(requestParams, com.yupi.yuapiclientsdk.model.User.class);
+        String usernameByPost = tempYupi.getUsernameByPost(user);
+        return ResultUtils.success(usernameByPost);
+    }
+
 
 }

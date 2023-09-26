@@ -36,6 +36,11 @@ public class InterfaceInfoUpdateRequest implements Serializable {
     private String url;
 
     /**
+     * 请求参数
+     */
+    private String requestParams;
+
+    /**
      * 请求头
      */
     private String requestHeader;
@@ -117,5 +122,13 @@ public class InterfaceInfoUpdateRequest implements Serializable {
 
     public void setMethod(String method) {
         this.method = method;
+    }
+
+    public String getRequestParams() {
+        return requestParams;
+    }
+
+    public void setRequestParams(String requestParams) {
+        this.requestParams = requestParams;
     }
 }

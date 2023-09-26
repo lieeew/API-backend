@@ -15,8 +15,8 @@ import java.util.stream.Collectors;
  */
 public enum InterfaceStatusEnum {
 
-    ONLINE("在线", 0),
-    OFFLINE("下线", 1),;
+    ONLINE("在线", 1),
+    OFFLINE("下线", 0),;
 
     private final String text;
 
