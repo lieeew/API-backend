@@ -2,9 +2,9 @@ package com.yupi.yuapi.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.yupi.yuapi.model.entity.Post;
-import com.yupi.yuapi.model.entity.User;
 import javax.annotation.Resource;
+import com.yuapicommen.model.entity.Post;
+import com.yuapicommen.model.entity.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

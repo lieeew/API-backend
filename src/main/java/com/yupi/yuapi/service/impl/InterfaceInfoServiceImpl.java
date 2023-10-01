@@ -1,10 +1,10 @@
 package com.yupi.yuapi.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.yuapicommen.model.entity.InterfaceInfo;
 import com.yupi.yuapi.common.ErrorCode;
 import com.yupi.yuapi.exception.BusinessException;
 import com.yupi.yuapi.mapper.InterfaceInfoMapper;
-import com.yupi.yuapi.model.entity.InterfaceInfo;
 import com.yupi.yuapi.service.InterfaceInfoService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;

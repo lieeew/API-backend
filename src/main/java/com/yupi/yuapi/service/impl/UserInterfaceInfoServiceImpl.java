@@ -2,10 +2,10 @@ package com.yupi.yuapi.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.yuapicommen.model.entity.UserInterfaceInfo;
 import com.yupi.yuapi.common.ErrorCode;
 import com.yupi.yuapi.exception.BusinessException;
 import com.yupi.yuapi.mapper.UserInterfaceInfoMapper;
-import com.yupi.yuapi.model.entity.UserInterfaceInfo;
 import com.yupi.yuapi.service.UserInterfaceInfoService;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;

@@ -2,7 +2,7 @@ package com.yupi.yuapi.mapper;
 
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.yupi.yuapi.model.entity.InterfaceInfo;
+import com.yuapicommen.model.entity.InterfaceInfo;
 
 /**
 * @author liang

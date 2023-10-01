@@ -2,6 +2,8 @@ package com.yupi.yuapi.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.yuapicommen.model.entity.User;
+import com.yuapicommen.model.entity.UserInterfaceInfo;
 import com.yupi.yuapi.annotation.AuthCheck;
 import com.yupi.yuapi.common.BaseResponse;
 import com.yupi.yuapi.common.ErrorCode;
@@ -10,14 +12,11 @@ import com.yupi.yuapi.exception.BusinessException;
 import com.yupi.yuapi.model.dto.userInterfaceInfo.UserInterfaceInfoAddRequest;
 import com.yupi.yuapi.model.dto.userInterfaceInfo.UserInterfaceInfoQueryRequest;
 import com.yupi.yuapi.model.dto.userInterfaceInfo.UserInterfaceInfoUpdateRequest;
-import com.yupi.yuapi.model.entity.User;
-import com.yupi.yuapi.model.entity.UserInterfaceInfo;
 import com.yupi.yuapi.service.UserInterfaceInfoService;
 import com.yupi.yuapi.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 

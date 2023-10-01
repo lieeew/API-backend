@@ -1,10 +1,10 @@
 package com.yupi.yuapi.aop;
 
+import com.yuapicommen.model.entity.User;
+import com.yuapicommen.model.enums.UserRoleEnum;
 import com.yupi.yuapi.annotation.AuthCheck;
 import com.yupi.yuapi.common.ErrorCode;
 import com.yupi.yuapi.exception.BusinessException;
-import com.yupi.yuapi.model.entity.User;
-import com.yupi.yuapi.model.enums.UserRoleEnum;
 import com.yupi.yuapi.service.UserService;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;

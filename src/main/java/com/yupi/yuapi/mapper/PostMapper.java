@@ -1,7 +1,7 @@
 package com.yupi.yuapi.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.yupi.yuapi.model.entity.Post;
+import com.yuapicommen.model.entity.Post;
 import java.util.Date;
 import java.util.List;
 

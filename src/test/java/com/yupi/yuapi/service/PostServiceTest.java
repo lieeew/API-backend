@@ -1,8 +1,8 @@
 package com.yupi.yuapi.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.yuapicommen.model.entity.Post;
 import com.yupi.yuapi.model.dto.post.PostQueryRequest;
-import com.yupi.yuapi.model.entity.Post;
 import javax.annotation.Resource;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

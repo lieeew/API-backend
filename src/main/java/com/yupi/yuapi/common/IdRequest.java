@@ -1,7 +1,5 @@
 package com.yupi.yuapi.common;
 
-import com.yupi.yuapi.model.entity.InterfaceInfo;
-import io.swagger.models.auth.In;
 
 import java.io.Serializable;
 

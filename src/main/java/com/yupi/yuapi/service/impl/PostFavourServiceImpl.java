@@ -5,18 +5,18 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.yuapicommen.model.entity.Post;
+import com.yuapicommen.model.entity.PostFavour;
+import com.yuapicommen.model.entity.User;
 import com.yupi.yuapi.common.ErrorCode;
 import com.yupi.yuapi.exception.BusinessException;
 import com.yupi.yuapi.mapper.PostFavourMapper;
-import com.yupi.yuapi.model.entity.Post;
-import com.yupi.yuapi.model.entity.PostFavour;
-import com.yupi.yuapi.model.entity.User;
 import com.yupi.yuapi.service.PostFavourService;
 import com.yupi.yuapi.service.PostService;
-import javax.annotation.Resource;
 import org.springframework.aop.framework.AopContext;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import javax.annotation.Resource;
 
 /**
  * 帖子收藏服务实现

@@ -2,18 +2,18 @@ package com.yupi.yuapi.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.yuapicommen.model.entity.Post;
+import com.yuapicommen.model.entity.PostThumb;
+import com.yuapicommen.model.entity.User;
 import com.yupi.yuapi.common.ErrorCode;
 import com.yupi.yuapi.exception.BusinessException;
 import com.yupi.yuapi.mapper.PostThumbMapper;
-import com.yupi.yuapi.model.entity.Post;
-import com.yupi.yuapi.model.entity.PostThumb;
-import com.yupi.yuapi.model.entity.User;
 import com.yupi.yuapi.service.PostService;
 import com.yupi.yuapi.service.PostThumbService;
-import javax.annotation.Resource;
 import org.springframework.aop.framework.AopContext;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import javax.annotation.Resource;
 
 /**
  * 帖子点赞服务实现

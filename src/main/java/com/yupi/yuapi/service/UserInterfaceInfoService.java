@@ -1,7 +1,8 @@
 package com.yupi.yuapi.service;
 
-import com.yupi.yuapi.model.entity.UserInterfaceInfo;
+
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.yuapicommen.model.entity.UserInterfaceInfo;
 
 /**
 * @author liang
@@ -10,6 +11,12 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface UserInterfaceInfoService extends IService<UserInterfaceInfo> {
 
+    /**
+     * 检验参数是否合法
+     *
+     * @param userInterfaceInfo
+     * @param b
+     */
     void validUserInterfaceInfo(UserInterfaceInfo userInterfaceInfo, boolean b);
 
     /**

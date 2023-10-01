@@ -1,6 +1,9 @@
 package com.yupi.yuapi.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.yuapicommen.model.entity.Post;
+import com.yuapicommen.model.entity.User;
+import com.yuapicommen.model.vo.PostVO;
 import com.yupi.yuapi.common.BaseResponse;
 import com.yupi.yuapi.common.ErrorCode;
 import com.yupi.yuapi.common.ResultUtils;
@@ -9,9 +12,6 @@ import com.yupi.yuapi.exception.ThrowUtils;
 import com.yupi.yuapi.model.dto.post.PostQueryRequest;
 import com.yupi.yuapi.model.dto.postfavour.PostFavourAddRequest;
 import com.yupi.yuapi.model.dto.postfavour.PostFavourQueryRequest;
-import com.yupi.yuapi.model.entity.Post;
-import com.yupi.yuapi.model.entity.User;
-import com.yupi.yuapi.model.vo.PostVO;
 import com.yupi.yuapi.service.PostFavourService;
 import com.yupi.yuapi.service.PostService;
 import com.yupi.yuapi.service.UserService;
@@ -71,7 +71,7 @@ public class PostFavourController {
      */
     @PostMapping("/my/list/page")
     public BaseResponse<Page<PostVO>> listMyFavourPostByPage(@RequestBody PostQueryRequest postQueryRequest,
-            HttpServletRequest request) {
+                                                             HttpServletRequest request) {
         if (postQueryRequest == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }

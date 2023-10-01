@@ -1,9 +1,9 @@
 package com.yupi.yuapi.job.cycle;
 
+import com.yuapicommen.model.entity.Post;
 import com.yupi.yuapi.esdao.PostEsDao;
 import com.yupi.yuapi.mapper.PostMapper;
 import com.yupi.yuapi.model.dto.post.PostEsDTO;
-import com.yupi.yuapi.model.entity.Post;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;

@@ -1,7 +1,7 @@
 package com.yupi.yuapi.mapper;
 
-import com.yupi.yuapi.model.entity.PostThumb;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.yuapicommen.model.entity.PostThumb;
 
 /**
  * 帖子点赞数据库操作

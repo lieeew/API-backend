@@ -1,7 +1,7 @@
 package com.yupi.yuapi.service;
 
-import com.yupi.yuapi.model.entity.User;
 import javax.annotation.Resource;
+import com.yuapicommen.model.entity.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

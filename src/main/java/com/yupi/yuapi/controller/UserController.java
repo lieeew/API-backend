@@ -1,6 +1,9 @@
 package com.yupi.yuapi.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.yuapicommen.model.entity.User;
+import com.yuapicommen.model.vo.LoginUserVO;
+import com.yuapicommen.model.vo.UserVO;
 import com.yupi.yuapi.annotation.AuthCheck;
 import com.yupi.yuapi.common.BaseResponse;
 import com.yupi.yuapi.common.DeleteRequest;
@@ -16,16 +19,10 @@ import com.yupi.yuapi.model.dto.user.UserQueryRequest;
 import com.yupi.yuapi.model.dto.user.UserRegisterRequest;
 import com.yupi.yuapi.model.dto.user.UserUpdateMyRequest;
 import com.yupi.yuapi.model.dto.user.UserUpdateRequest;
-import com.yupi.yuapi.model.entity.User;
-import com.yupi.yuapi.model.vo.LoginUserVO;
-import com.yupi.yuapi.model.vo.UserVO;
 import com.yupi.yuapi.service.UserService;
-
-import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.bean.WxOAuth2UserInfo;
 import me.chanjar.weixin.common.bean.oauth2.WxOAuth2AccessToken;
@@ -38,6 +35,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * 用户接口

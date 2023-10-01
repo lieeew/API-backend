@@ -1,8 +1,8 @@
 package com.yupi.yuapi.job.once;
 
+import com.yuapicommen.model.entity.Post;
 import com.yupi.yuapi.esdao.PostEsDao;
 import com.yupi.yuapi.model.dto.post.PostEsDTO;
-import com.yupi.yuapi.model.entity.Post;
 import com.yupi.yuapi.service.PostService;
 import java.util.List;
 import java.util.stream.Collectors;

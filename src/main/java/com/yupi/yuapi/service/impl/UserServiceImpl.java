@@ -1,36 +1,33 @@
 package com.yupi.yuapi.service.impl;
 
-import static com.yupi.yuapi.constant.UserConstant.USER_LOGIN_STATE;
-
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.crypto.digest.DigestUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.yuapicommen.model.entity.User;
+import com.yuapicommen.model.enums.UserRoleEnum;
+import com.yuapicommen.model.vo.LoginUserVO;
+import com.yuapicommen.model.vo.UserVO;
 import com.yupi.yuapi.common.ErrorCode;
 import com.yupi.yuapi.constant.CommonConstant;
 import com.yupi.yuapi.exception.BusinessException;
 import com.yupi.yuapi.mapper.UserMapper;
 import com.yupi.yuapi.model.dto.user.UserQueryRequest;
-import com.yupi.yuapi.model.entity.User;
-import com.yupi.yuapi.model.enums.UserRoleEnum;
-import com.yupi.yuapi.model.vo.LoginUserVO;
-import com.yupi.yuapi.model.vo.UserVO;
 import com.yupi.yuapi.service.UserService;
 import com.yupi.yuapi.utils.SqlUtils;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.stream.Collectors;
-import javax.servlet.http.HttpServletRequest;
-
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.bean.WxOAuth2UserInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static com.yupi.yuapi.constant.UserConstant.USER_LOGIN_STATE;
 
 /**
  * 用户服务实现

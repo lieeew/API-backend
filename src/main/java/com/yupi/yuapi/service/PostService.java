@@ -3,9 +3,9 @@ package com.yupi.yuapi.service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.yuapicommen.model.entity.Post;
+import com.yuapicommen.model.vo.PostVO;
 import com.yupi.yuapi.model.dto.post.PostQueryRequest;
-import com.yupi.yuapi.model.entity.Post;
-import com.yupi.yuapi.model.vo.PostVO;
 import javax.servlet.http.HttpServletRequest;
 
 /**
