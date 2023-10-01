@@ -10,7 +10,6 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * @author leikooo
- *
  */
 @Configuration
 @ConfigurationProperties(prefix = "spring.redis")
@@ -47,8 +46,8 @@ public class RedissonConfig {
         // 1. Create config object
         Config config = new Config();
         // 这里不要写死
-        String redissonUrl = String.format("redis://%s:%s@%s:%s", username, password, host, port);
-
+        // String redissonUrl = String.format("redis://%s:%s@%s:%s", username, password, host, port);
+        String redissonUrl = String.format("redis://%s:%s", host, port);
         config.useSingleServer().setAddress(redissonUrl).setDatabase(Integer.parseInt(database));
 
         // 2. Create Redisson instance
