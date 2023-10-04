@@ -129,17 +129,28 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.dubbo/dubbo -->
+        <dependency>
+            <groupId>org.apache.dubbo</groupId>
+            <artifactId>dubbo</artifactId>
+            <version>3.0.9</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.nacos</groupId>
+            <artifactId>nacos-client</artifactId>
+            <version>2.1.0</version>
+        </dependency>
         <!--自定义 yuapi 的 sdk-->
         <dependency>
             <groupId>com.yupi</groupId>
             <artifactId>yuapi-client-sdk</artifactId>
-            <version>0.0.2</version>
+            <version>0.0.4</version>
         </dependency>
 <!--        commen 类-->
         <dependency>
             <groupId>com.yupi</groupId>
             <artifactId>yuapi-commen</artifactId>
-            <version>0.01</version>
+            <version>0.06</version>
         </dependency>
     </dependencies>
 

@@ -119,8 +119,8 @@ public class UserInterfaceInfoController {
      * @param pageSize 一页里面的数量
      * @return
      */
-    @AuthCheck(mustRole = "admin")
     @GetMapping("/list/page")
+    @AuthCheck(mustRole = "admin")
     public BaseResponse<Page<UserInterfaceInfo>> listUserInterfaceByPageInfo(UserInterfaceInfoQueryRequest userInterfaceInfoQueryRequest, Integer current, Integer pageSize) {
         UserInterfaceInfo userInterfaceInfoQuery = new UserInterfaceInfo();
         if (userInterfaceInfoQueryRequest != null) {

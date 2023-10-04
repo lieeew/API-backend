@@ -43,8 +43,6 @@ public class InterfaceInfoController {
     @Resource
     private UserService userService;
 
-    @Resource
-    private YupiApiClient yupiApiClient;
 
     /**
      * 创建
@@ -158,10 +156,17 @@ public class InterfaceInfoController {
         if (oldInterfaceInfo == null) {
             throw new BusinessException(ErrorCode.NOT_FOUND_ERROR);
         }
-
+        User loginUser = userService.getLoginUser(request);
+        String accessKey = loginUser.getAccessKey();
+        String secretKey = loginUser.getSecretKey();
+        String interfaceInfoName = oldInterfaceInfo.getName();
+        if (StringUtils.isAnyEmpty(secretKey, accessKey, interfaceInfoName)) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
         // 判断接口是否可以运行
         com.yupi.yuapiclientsdk.model.User user = new com.yupi.yuapiclientsdk.model.User();
         user.setUsername("leikooo");
+        YupiApiClient yupiApiClient = new YupiApiClient(accessKey, secretKey, interfaceInfoName);
         String usernameByPost = yupiApiClient.getUsernameByPost(user);
         if (StringUtils.isBlank(usernameByPost)) {
             throw new BusinessException(ErrorCode.SYSTEM_ERROR, "接口调用失败");
@@ -233,7 +238,9 @@ public class InterfaceInfoController {
         User loginUser = userService.getLoginUser(request);
         String secretKey = loginUser.getSecretKey();
         String accessKey = loginUser.getAccessKey();
-        YupiApiClient tempYupi = new YupiApiClient(secretKey, accessKey);
+        // 方法名称 作为唯一标识
+        String methodName = interfaceInfoInvokeRequest.getMethodName();
+        YupiApiClient tempYupi = new YupiApiClient(secretKey, accessKey, methodName);
         // 转换参数
         String requestParams = interfaceInfoInvokeRequest.getUserRequestParams();
         Gson gson = new Gson();

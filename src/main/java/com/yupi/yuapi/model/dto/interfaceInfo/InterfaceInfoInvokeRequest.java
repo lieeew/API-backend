@@ -18,6 +18,11 @@ public class InterfaceInfoInvokeRequest implements Serializable {
     private Long id;
 
     /**
+     * 方法名
+     */
+    private String methodName;
+
+    /**
      * 请求参数
      */
     private String userRequestParams;
@@ -36,5 +41,13 @@ public class InterfaceInfoInvokeRequest implements Serializable {
 
     public void setUserRequestParams(String userRequestParams) {
         this.userRequestParams = userRequestParams;
+    }
+
+    public String getMethodName() {
+        return methodName;
+    }
+
+    public void setMethodName(String methodName) {
+        this.methodName = methodName;
     }
 }
