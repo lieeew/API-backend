@@ -1,18 +1,24 @@
 package com.yupi.yuapi.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.yuapicommen.model.entity.User;
 import com.yuapicommen.model.entity.UserInterfaceInfo;
 import com.yupi.yuapi.common.ErrorCode;
 import com.yupi.yuapi.exception.BusinessException;
 import com.yupi.yuapi.mapper.UserInterfaceInfoMapper;
+import com.yupi.yuapi.model.dto.userInterfaceInfo.UserInterfaceInfoAddRequest;
 import com.yupi.yuapi.service.UserInterfaceInfoService;
+import com.yupi.yuapi.service.UserService;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -26,6 +32,10 @@ public class UserInterfaceInfoServiceImpl extends ServiceImpl<UserInterfaceInfoM
 
     @Resource
     private RedissonClient redissonClient;
+
+    @Resource
+    private UserInterfaceInfoMapper userInterfaceInfoMapper;
+
 
     @Override
     public void validUserInterfaceInfo(UserInterfaceInfo userInterfaceInfo, boolean b) {
@@ -68,6 +78,28 @@ public class UserInterfaceInfoServiceImpl extends ServiceImpl<UserInterfaceInfoM
             }
         }
         return false;
+    }
+
+    @Override
+    public long addUserInterfaceInfoCount(long userId, long interfaceInfoId, int totalCount) {
+        UserInterfaceInfo userInterfaceInfo = new UserInterfaceInfo();
+        userInterfaceInfo.setUserId(userId);
+        userInterfaceInfo.setInterfaceInfoId(userId);
+        userInterfaceInfo.setTotalNum(totalCount);
+        // 校验参数
+        validUserInterfaceInfo(userInterfaceInfo, true);
+        QueryWrapper<UserInterfaceInfo> userInterfaceInfoQueryWrapper = new QueryWrapper<>();
+        userInterfaceInfoQueryWrapper.eq("userId", userId);
+        userInterfaceInfoQueryWrapper.eq("interfaceInfoId", interfaceInfoId);
+        UserInterfaceInfo selectOne = userInterfaceInfoMapper.selectOne(userInterfaceInfoQueryWrapper);
+        if (selectOne != null) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "已经存在该用户对应的接口");
+        }
+        boolean result = this.save(userInterfaceInfo);
+        if (!result) {
+            throw new BusinessException(ErrorCode.OPERATION_ERROR);
+        }
+        return userInterfaceInfo.getId();
     }
 }
 

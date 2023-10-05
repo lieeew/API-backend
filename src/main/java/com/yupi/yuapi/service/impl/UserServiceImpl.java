@@ -14,6 +14,7 @@ import com.yupi.yuapi.constant.CommonConstant;
 import com.yupi.yuapi.exception.BusinessException;
 import com.yupi.yuapi.mapper.UserMapper;
 import com.yupi.yuapi.model.dto.user.UserQueryRequest;
+import com.yupi.yuapi.service.UserInterfaceInfoService;
 import com.yupi.yuapi.service.UserService;
 import com.yupi.yuapi.utils.SqlUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +23,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
+
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;

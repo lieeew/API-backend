@@ -19,6 +19,7 @@ import com.yupi.yuapi.model.dto.user.UserQueryRequest;
 import com.yupi.yuapi.model.dto.user.UserRegisterRequest;
 import com.yupi.yuapi.model.dto.user.UserUpdateMyRequest;
 import com.yupi.yuapi.model.dto.user.UserUpdateRequest;
+import com.yupi.yuapi.service.UserInterfaceInfoService;
 import com.yupi.yuapi.service.UserService;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -56,7 +57,8 @@ public class UserController {
     private WxOpenConfig wxOpenConfig;
 
     // region 登录相关
-
+    @Resource
+    private UserInterfaceInfoService userInterfaceInfoService;
     /**
      * 用户注册
      *
@@ -74,8 +76,17 @@ public class UserController {
         if (StringUtils.isAnyBlank(userAccount, userPassword, checkPassword)) {
             return null;
         }
-        long result = userService.userRegister(userAccount, userPassword, checkPassword);
-        return ResultUtils.success(result);
+        long userId = userService.userRegister(userAccount, userPassword, checkPassword);
+        if (userId <= 0) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        // 免费赠送 100 条记录，默认赠送 一号接口的信息
+        // todo 后面可以优化赠送不固定接口
+        long userInterfaceInfoId = userInterfaceInfoService.addUserInterfaceInfoCount(userId, 1, 100);
+        if (userInterfaceInfoId <= 0) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        return ResultUtils.success(userId);
     }
 
     /**

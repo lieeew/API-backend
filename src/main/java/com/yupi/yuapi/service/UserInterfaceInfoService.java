@@ -3,6 +3,9 @@ package com.yupi.yuapi.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.yuapicommen.model.entity.UserInterfaceInfo;
+import com.yupi.yuapi.model.dto.userInterfaceInfo.UserInterfaceInfoAddRequest;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
 * @author liang
@@ -27,4 +30,14 @@ public interface UserInterfaceInfoService extends IService<UserInterfaceInfo> {
      * @return
      */
     boolean invokeCount(long interfaceId, long userId);
+
+    /**
+     * 添加表中的数据
+     *
+     * @param interfaceInfoId
+     * @param totalCount
+     * @param userId
+     * @return 新增数据的 id
+     */
+    long addUserInterfaceInfoCount(long userId, long interfaceInfoId, int totalCount);
 }

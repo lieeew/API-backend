@@ -50,17 +50,12 @@ public class UserInterfaceInfoController {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
         UserInterfaceInfo userInterfaceInfo = new UserInterfaceInfo();
-        BeanUtils.copyProperties(userInterfaceInfoAddRequest, userInterfaceInfo);
         // 校验
+        BeanUtils.copyProperties(userInterfaceInfoAddRequest, userInterfaceInfo);
         userInterfaceInfoService.validUserInterfaceInfo(userInterfaceInfo, true);
         User loginUser = userService.getLoginUser(request);
-        userInterfaceInfo.setUserId(loginUser.getId());
-        boolean result = userInterfaceInfoService.save(userInterfaceInfo);
-        if (!result) {
-            throw new BusinessException(ErrorCode.OPERATION_ERROR);
-        }
-        long newUserInterfaceInfoId = userInterfaceInfo.getId();
-        return ResultUtils.success(newUserInterfaceInfoId);
+        long userInterfaceInfoId = userInterfaceInfoService.addUserInterfaceInfoCount(loginUser.getId(), userInterfaceInfo.getId(), userInterfaceInfo.getTotalNum());
+        return ResultUtils.success(userInterfaceInfoId);
     }
 
     /**

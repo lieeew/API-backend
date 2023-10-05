@@ -3,6 +3,9 @@ package com.yupi.yuapi.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.yuapicommen.model.entity.UserInterfaceInfo;
+import com.yuapicommen.model.vo.UserInterfaceVO;
+
+import java.util.List;
 
 /**
 * @author liang
@@ -12,6 +15,7 @@ import com.yuapicommen.model.entity.UserInterfaceInfo;
 */
 public interface UserInterfaceInfoMapper extends BaseMapper<UserInterfaceInfo> {
 
+    List<UserInterfaceInfo> listTopInvokeInterface(int limit);
 }
 
 
