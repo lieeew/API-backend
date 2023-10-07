@@ -81,7 +81,7 @@ public class UserController {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
         // 免费赠送 100 条记录，默认赠送 一号接口的信息
-        // todo 后面可以优化赠送不固定接口
+        // todo 后面可以优化赠送不固定接口, 前端传递特定的参数
         long userInterfaceInfoId = userInterfaceInfoService.addUserInterfaceInfoCount(userId, 1, 100);
         if (userInterfaceInfoId <= 0) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
