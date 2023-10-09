@@ -23,6 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Objects;
@@ -245,9 +246,9 @@ public class InterfaceInfoController {
         String requestParams = interfaceInfoInvokeRequest.getUserRequestParams();
         Gson gson = new Gson();
         com.yupi.yuapiclientsdk.model.User user = gson.fromJson(requestParams, com.yupi.yuapiclientsdk.model.User.class);
+        // 这里这么扩展？因为后面有很多不同的方法
+        // 这里请求之后会去找到 后端的 gateway
         String usernameByPost = tempYupi.getUsernameByPost(user);
         return ResultUtils.success(usernameByPost);
     }
-
-
 }
